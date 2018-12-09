@@ -34,11 +34,14 @@ def classify(features,labels):
 def getFeatures(trees):
     # Root Node degree:
     rootNodes = loadMapping("processed_data/half/half_dfTree_rootNode_mapping.txt")
+    rootDegs = []
+    for i in rootNodes:
+        
     print len(rootNodes)
 
     ft = pd.DataFrame()
     return ft
-    
+
 if __name__ == "__main__":
     trees = loadTreesFromFile("/Users/zilongwang/Documents/GitHub/cs224w-project/processed_data/half/trees/")
     print len(trees)

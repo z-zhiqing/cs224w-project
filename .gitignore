@@ -1,4 +1,4 @@
-processed_data/.DS_Store
-process_social_communities.pyc 
-utilities.pyc
-*/.DS_Store
+processed_data/total/
+*.gexf
+*.pyc
+processed_data/*.DS_Store

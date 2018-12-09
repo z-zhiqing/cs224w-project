@@ -21,7 +21,6 @@ def getDataPointsToPlot(Graph, degType):
     Y: list of frequencies: Y[i] = fraction of nodes with degree X[i]
     """
     ############################################################################
-    # TODO: Your code here!
     DegToCntV = snap.TIntPrV()
 
     if degType == "In":

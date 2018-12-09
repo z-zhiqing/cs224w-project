@@ -12,6 +12,10 @@ def split_activity_file(activityType):
                 if activity == activityType:
                     f.write('%s %s %s %s\n' % (start_id, end_id, timestamp, activity))
 
+def read_and_plot_tree(filepath):
+    G = nx.read_edgelist(filepath, create_using=nx.DiGraph())
+    nx.write_gexf(G, "928.gexf")
+
 def loadTreesFromFile(dir):
     trees = []
 
