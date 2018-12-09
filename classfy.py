@@ -40,9 +40,14 @@ def getFeatures(trees):
 
     for i in rootNodes:
         index = int(i[0])
-        deg = trees[index][0].GetNI(i[1]).GetDeg()
-        rootDegs.append(deg)
-        strVirals.append(getStructuralVirality(trees[index][1]))
+        if index in trees:
+            t = trees[index][0]
+            nodeId = int(i[1])
+            print "index: ",index," node id: ", nodeId
+            nd = t.GetNI(nodeId)
+            deg = nd.GetDeg()
+            rootDegs.append(deg)
+            strVirals.append(getStructuralVirality(trees[index][1]))
 
     print len(strVirals)
 

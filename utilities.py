@@ -17,14 +17,16 @@ def read_and_plot_tree(filepath):
     nx.write_gexf(G, "928.gexf")
 
 def loadTreesFromFile(dir):
-    trees = []
+    trees = {}
 
     for filename in os.listdir(dir):
         if filename.endswith(".txt"):
             path = dir + filename
+            treeId = int(filename.split("_")[1].split(".")[0])
             G_snap = snap.LoadEdgeList(snap.PNGraph, path, 0, 1)
             G_networkx = nx.read_edgelist(path, create_using=nx.DiGraph())
-            trees.append((G_snap,G_networkx))
+            if (G_snap.GetNodes() > 1):
+                trees[treeId] = (G_snap,G_networkx)
 
     return trees
 
