@@ -26,3 +26,11 @@ def loadTreesFromFile(dir):
 
 def getStructuralVirality(tree):
     return nx.average_shortest_path_length(tree)
+
+def loadMapping(fileName):
+    result = []
+    with open (fileName,"r") as myfile:
+            for line in myfile:
+                temp = line.split()
+                result.append(temp)
+    return result
