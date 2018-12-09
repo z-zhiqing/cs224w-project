@@ -4,6 +4,7 @@ import networkx as nx
 import numpy as np
 from scipy import stats
 import datetime
+from matplotlib import pyplot as plt
 
 # Louvain algorithm, networkx community api
 def compute_community():
@@ -72,7 +73,22 @@ def get_friends():
             f.write('{} {}\n'.format(friend[0], friend[1]))
     print "Saving friendship completed: " + str(datetime.datetime.now())
 
+def plot_community_dist():
+    node_community_mapping, communities = load_communities()
+
+    DegToFrqV = { value : sum(value == size for size in communities.values())/float(len(communities.values())) for key, value in communities.items() }
+    DegToFrqV = sorted(DegToFrqV.items())
+    x, y = zip(*DegToFrqV)
+
+    plt.loglog(x, y, marker='.', color = 'b')
+    plt.xlabel('Social community size (log)')
+    plt.ylabel('Proportion of the communities with a given size (log)')
+    plt.title('Size Distribution of Social Communities')
+    plt.legend()
+    plt.show()
+
 if __name__ == "__main__":
     #get_community_stats()
-    get_friends()
+    #get_friends()
+    plot_community_dist()
     print "Done with processing social communities.\n"

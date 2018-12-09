@@ -7,17 +7,21 @@ import datetime
 from scipy import stats
 from process_social_communities import load_communities
 from utilities import split_activity_file
+from utilities import read_and_plot_tree
 
 def main():
     global node_community_mapping, node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees
 
     #split_activity_file('RT')
-    split_activity_file('MT')
-    split_activity_file('RE')
+    #split_activity_file('MT')
+    
+    #split_activity_file('RE')
     #node_community_mapping, communities = load_communities()
     #node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('RT')
-    node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('MT')
-    node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('RE')
+    #node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('MT')
+    #node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('RE')
+
+    read_and_plot_tree('processed_data/total/trees/928.txt')
 
 def construct_diffusion_trees(activityType):
     node_dfTree_mapping = dict()
