@@ -1,23 +1,23 @@
 import snap
-import community
+#import community
 import networkx as nx
 import numpy as np
 import datetime
 
 from scipy import stats
-from process_social_communities import load_communities
+#from process_social_communities import load_communities
 from utilities import split_activity_file
 
 def main():
     global node_community_mapping, node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees
 
     #split_activity_file('RT')
-    split_activity_file('MT')
-    split_activity_file('RE')
+    #split_activity_file('MT')
+    #split_activity_file('RE')
     #node_community_mapping, communities = load_communities()
     #node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('RT')
-    node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('MT')
-    node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('RE')
+    #node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('MT')
+    node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('half')
 
 def construct_diffusion_trees(activityType):
     node_dfTree_mapping = dict()
@@ -69,8 +69,8 @@ def construct_diffusion_trees(activityType):
             # else if end node is already in df tree - do nothing (1st activity determines df tree)
             # update df tree latest timestamp
             dfTree_timestamp_mapping[node_dfTree_mapping[end_id]][1] = timestamp
-            #print "{}: {}".format(activityType, counter)
-            #counter += 1
+            print "{}: {}".format(activityType, counter)
+            counter += 1
 
     with open('processed_data/{}/{}_node_dfTree_mapping.txt'.format(activityType, activityType), 'w') as f:
         for key, value in node_dfTree_mapping.items():
