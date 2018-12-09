@@ -36,6 +36,7 @@ def getFeatures(trees):
     # Root Node degree:
     rootNodes = loadMapping("processed_data/half/half_dfTree_rootNode_mapping.txt")
     rootDegs = []
+    rootSocialDegs = []
     strVirals = []
 
     for i in rootNodes:
@@ -48,8 +49,6 @@ def getFeatures(trees):
             deg = nd.GetDeg()
             rootDegs.append(deg)
             strVirals.append(getStructuralVirality(trees[index][1]))
-
-    print len(strVirals)
 
     ft = pd.DataFrame()
     return ft
