@@ -9,6 +9,7 @@ from scipy.stats.stats import pearsonr
 from pylab import polyfit, poly1d
 
 from network_description import load_graph
+from utilities import loadTreesFromFile, load_mapping
 
 random.seed(datetime.datetime.now())
 
@@ -156,9 +157,19 @@ def bfs(G,n,rootTime, timeM):
 if __name__ == "__main__":
 
     total_trees = loadTreesFromFile('processed_data/total/trees/')
-    rt_trees = loadTreesFromFile
+    total_tree_rootnode_mappping = load_mapping('processed_data/total/dfTree_rootNode_mapping.txt')
+    total_node_tree_mapping = load_mapping('processed_data/total/node_dfTree_mapping.txt')
 
-    G_ret = load_graph("retweet")
+    rt_trees = loadTreesFromFile('processed_data/RT/trees/')
+    rt_tree_rootnode_mappping = load_mapping('processed_data/RT/RT_dfTree_rootNode_mapping.txt')
+    rt_node_tree_mapping = load_mapping('processed_data/RT/RT_node_dfTree_mapping.txt')
+
+
+
+
+
+
+    """G_ret = load_graph("retweet")
     print "Nodes: ", G_ret.GetNodes()
     print "Edges: ", G_ret.GetEdges()
 
@@ -166,7 +177,7 @@ if __name__ == "__main__":
     G_reply = load_graph("reply")
     G_social = load_graph("social")
     print "Social Nodes: ", G_social.GetNodes()
-    print "Social Edges: ", G_social.GetEdges()
+    print "Social Edges: ", G_social.GetEdges()"""
 
     timeD = loadTimeData("RT")
     timeM = getTimeMatrix(timeD,G_ret.GetNodes())

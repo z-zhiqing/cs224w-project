@@ -38,3 +38,14 @@ def loadMapping(fileName):
                 temp = line.split()
                 result.append(temp)
     return result
+
+def load_mapping(filepath):
+    result = dict()
+    with open(filepath, 'r') as data:
+        for item in data:
+            key, value = item.split()
+            key = int(key)
+            if type(value) == 'int':
+                value = int(value)
+            result[key] = value
+    return result
