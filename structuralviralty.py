@@ -136,3 +136,34 @@ def getSVandSize(trees):
         svArr.append(t[2])
 
     return svArr, sizeArr
+
+def bfs(G,n,rootTime, timeM):
+    res = snap.TNGraph.New()
+    s = set()
+    q = []
+    sumSize = 0
+    sumSizeSqr = 0
+    q.append((n,rootTime,0))
+    
+    while (q):
+        cur = q.pop()
+        curNode = cur[0]
+        curTime = cur[1]
+        curD = cur[2]
+        sumSize += curD
+        sumSizeSqr+=curD*curD
+        if curNode not in s:
+            s.add(curNode)
+            res.AddNode(curNode)
+        for nbr in neighbors(G,G.GetNI(curNode)):
+            if G.IsEdge(curNode,nbr):
+                edgeTime = timeM[(curNode,nbr)]
+                if nbr not in s and edgeTime > curTime:
+                    q.append((nbr,edgeTime, curD+1))
+                    s.add(nbr)
+                    res.AddNode(nbr)
+                    res.AddEdge(curNode,nbr)
+
+    n = res.GetNodes()
+    sv = 0 if n==1 else float(2*n/(n-1)) * (float(sumSize)/n - sumSizeSqr/float(n*n))
+    return res, sv
