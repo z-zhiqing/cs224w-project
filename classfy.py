@@ -8,6 +8,7 @@ import numpy as np
 import datetime
 import networkx
 from utilities import loadTreesFromFile
+from utilities import loadMapping
 
 def classify(features,labels):
 #Load dataset
@@ -30,6 +31,15 @@ def classify(features,labels):
 
     y_pred=clf.predict(X_test)
 
+def getFeatures(trees):
+    # Root Node degree:
+    rootNodes = loadMapping("processed_data/half/half_dfTree_rootNode_mapping.txt")
+    print len(rootNodes)
+
+    ft = pd.DataFrame()
+    return ft
+    
 if __name__ == "__main__":
     trees = loadTreesFromFile("/Users/zilongwang/Documents/GitHub/cs224w-project/processed_data/half/trees/")
     print len(trees)
+    ft = getFeatures(trees)
