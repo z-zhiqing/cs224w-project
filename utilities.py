@@ -23,7 +23,7 @@ def loadTreesFromFile(dir):
         if filename.endswith(".txt"):
             path = dir + filename
             G_snap = snap.LoadEdgeList(snap.PNGraph, path, 0, 1)
-            G_networkx = nx.read_edgelist(path)
+            G_networkx = nx.read_edgelist(path, create_using=nx.DiGraph())
             trees.append((G_snap,G_networkx))
 
     return trees

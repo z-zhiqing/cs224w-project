@@ -9,6 +9,7 @@ import datetime
 import networkx
 from utilities import loadTreesFromFile
 from utilities import loadMapping
+from utilities import getStructuralVirality
 
 def classify(features,labels):
 #Load dataset
@@ -35,9 +36,15 @@ def getFeatures(trees):
     # Root Node degree:
     rootNodes = loadMapping("processed_data/half/half_dfTree_rootNode_mapping.txt")
     rootDegs = []
+    strVirals = []
+
     for i in rootNodes:
-        
-    print len(rootNodes)
+        index = int(i[0])
+        deg = trees[index][0].GetNI(i[1]).GetDeg()
+        rootDegs.append(deg)
+        strVirals.append(getStructuralVirality(trees[index][1]))
+
+    print len(strVirals)
 
     ft = pd.DataFrame()
     return ft
