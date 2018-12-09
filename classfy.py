@@ -36,8 +36,7 @@ def getFeatures(trees):
     rootNodes = loadMapping("processed_data/half/half_dfTree_rootNode_mapping.txt")
     rootDegs = []
     for i in rootNodes:
-        
-    print len(rootNodes)
+        print len(rootNodes)
 
     ft = pd.DataFrame()
     return ft
