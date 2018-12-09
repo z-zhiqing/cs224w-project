@@ -8,6 +8,9 @@ from matplotlib.ticker import FormatStrFormatter
 from scipy.stats.stats import pearsonr
 from pylab import polyfit, poly1d
 
+from network_description import load_graph
+from utilities import loadTreesFromFile, load_mapping
+
 random.seed(datetime.datetime.now())
 
 def neighbors(G,src):
@@ -17,24 +20,6 @@ def neighbors(G,src):
         nb = src.GetNbrNId(e)
         res.append(nb)
     return res
-
-def load_graph(name):
-    '''
-    Helper function to load undirected graphs.
-    Check that the respective .txt files are in the same folder as this script;
-    if not, change the paths below as required.
-    '''
-    if name == "retweet":
-        G = snap.LoadEdgeList(snap.PNGraph, "/Users/zilongwang/Desktop/CS224/Project/higgs-retweet_reversed.edgelist", 0, 1)
-    elif name == 'mention':
-        G = snap.LoadEdgeList(snap.PNGraph, "/Users/zilongwang/Desktop/CS224/Project/higgs-mention_network.edgelist", 0, 1)
-    elif name == 'reply':
-        G = snap.LoadEdgeList(snap.PNGraph, "/Users/zilongwang/Desktop/CS224/Project/higgs-reply_network.edgelist", 0, 1)
-    elif name == 'social':
-        G = snap.LoadEdgeList(snap.PNGraph, "/Users/zilongwang/Desktop/CS224/Project/higgs-social_network.edgelist", 0, 1)
-    else:
-        raise ValueError("Invalid graph: please use 'normal', 'rewired' or 'sample'.")
-    return G
 
 def revertG():
     with open ("/Users/zilongwang/Desktop/CS224/Project/higgs-retweet_network.edgelist", "r") as myfile:
@@ -171,9 +156,20 @@ def bfs(G,n,rootTime, timeM):
 
 if __name__ == "__main__":
 
-    #revertG()
+    total_trees = loadTreesFromFile('processed_data/total/trees/')
+    total_tree_rootnode_mappping = load_mapping('processed_data/total/dfTree_rootNode_mapping.txt')
+    total_node_tree_mapping = load_mapping('processed_data/total/node_dfTree_mapping.txt')
 
-    G_ret = load_graph("retweet")
+    rt_trees = loadTreesFromFile('processed_data/RT/trees/')
+    rt_tree_rootnode_mappping = load_mapping('processed_data/RT/RT_dfTree_rootNode_mapping.txt')
+    rt_node_tree_mapping = load_mapping('processed_data/RT/RT_node_dfTree_mapping.txt')
+
+
+
+
+
+
+    """G_ret = load_graph("retweet")
     print "Nodes: ", G_ret.GetNodes()
     print "Edges: ", G_ret.GetEdges()
 
@@ -181,7 +177,7 @@ if __name__ == "__main__":
     G_reply = load_graph("reply")
     G_social = load_graph("social")
     print "Social Nodes: ", G_social.GetNodes()
-    print "Social Edges: ", G_social.GetEdges()
+    print "Social Edges: ", G_social.GetEdges()"""
 
     timeD = loadTimeData("RT")
     timeM = getTimeMatrix(timeD,G_ret.GetNodes())

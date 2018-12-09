@@ -1,4 +1,5 @@
 processed_data/total/
+processed_data/RT/
 *.gexf
 *.pyc
 processed_data/*.DS_Store

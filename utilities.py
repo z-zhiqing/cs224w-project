@@ -12,9 +12,9 @@ def split_activity_file(activityType):
                 if activity == activityType:
                     f.write('%s %s %s %s\n' % (start_id, end_id, timestamp, activity))
 
-def read_and_plot_tree(filepath):
+def read_and_plot_tree(filepath, outfilename):
     G = nx.read_edgelist(filepath, create_using=nx.DiGraph())
-    nx.write_gexf(G, "928.gexf")
+    nx.write_gexf(G, "{}.gexf".format(outfilename))
 
 def loadTreesFromFile(dir):
     trees = {}
@@ -39,4 +39,15 @@ def loadMapping(fileName):
             for line in myfile:
                 temp = line.split()
                 result.append(temp)
+    return result
+
+def load_mapping(filepath):
+    result = dict()
+    with open(filepath, 'r') as data:
+        for item in data:
+            key, value = item.split()
+            key = int(key)
+            if type(value) == 'int':
+                value = int(value)
+            result[key] = value
     return result

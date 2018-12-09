@@ -17,7 +17,7 @@ def main():
 
     node_dfTree_mapping, dfTree_rootNode_mapping, dfTree_timestamp_mapping, dfTrees = construct_diffusion_trees('half')
 
-    read_and_plot_tree('processed_data/total/trees/928.txt')
+    read_and_plot_tree('processed_data/total/trees/928.txt', '928')
 
 def construct_diffusion_trees(activityType):
     node_dfTree_mapping = dict()
