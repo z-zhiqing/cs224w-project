@@ -13,7 +13,7 @@ def split_activity_file(activityType):
                     f.write('%s %s %s %s\n' % (start_id, end_id, timestamp, activity))
 
 def read_and_plot_tree(filepath, outfilename):
-    G = nx.read_edgelist(filepath, create_using=nx.DiGraph())
+    G = nx.read_edgelist(filepath, nodetype=int)
     nx.write_gexf(G, "{}.gexf".format(outfilename))
 
 def loadTreesFromFile(dir):
@@ -22,9 +22,12 @@ def loadTreesFromFile(dir):
     for filename in os.listdir(dir):
         if filename.endswith(".txt"):
             path = dir + filename
-            treeId = int(filename.split("_")[1].split(".")[0])
+            if "_" in filename:
+                treeId = int(filename.split("_")[1].split(".")[0])
+            else:
+                treeId = int(filename.split(".")[0])
             G_snap = snap.LoadEdgeList(snap.PNGraph, path, 0, 1)
-            G_networkx = nx.read_edgelist(path, create_using=nx.DiGraph())
+            G_networkx = nx.read_edgelist(path, nodetype=int)
             if (G_snap.GetNodes() > 1):
                 trees[treeId] = (G_snap,G_networkx)
 
