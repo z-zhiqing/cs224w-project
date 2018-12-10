@@ -37,10 +37,11 @@ def load_communities():
 	return node_community_mapping, communities
 
 def get_community_stats():
+    G = nx.read_edgelist(path="raw_data/higgs-social_network.edgelist", nodetype=int)
     node_community_mapping, communities = load_communities()
-    print communities
 
     # Get stats
+    modularity = community.modularity(node_community_mapping, G)
     sizes = list(communities.values())
     count = len(sizes)
     min_size = min(sizes)
@@ -48,7 +49,7 @@ def get_community_stats():
     mean_size = np.mean(sizes)
     median_size = np.median(sizes)
     mode_size = stats.mode(sizes)
-    print "Total number of communities: {}, min: {}, max: {}, mean: {}, median: {}, mode: {}".format(count, min_size, max_size, mean_size, median_size, mode_size)
+    print "Total number of communities: {}, min: {}, max: {}, mean: {}, median: {}, mode: {}, modularity: {}".format(count, min_size, max_size, mean_size, median_size, mode_size, modularity)
 
 def get_friends():
     friends = set()
@@ -73,6 +74,6 @@ def get_friends():
     print "Saving friendship completed: " + str(datetime.datetime.now())
 
 if __name__ == "__main__":
-    #get_community_stats()
-    get_friends()
+    get_community_stats()
+    #get_friends()
     print "Done with processing social communities.\n"
